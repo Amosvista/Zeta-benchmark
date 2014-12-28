@@ -1,0 +1,12 @@
+.*
+*~
+.tern*
+.#*
+node_modules/
+!test/base/node_modules
+coverage/
+*.log
+!.gitignore
+!.travis.yml
+*.wiki
+tmp.txt
