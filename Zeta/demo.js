@@ -1,4 +1,4 @@
-var Zeta=require('Zeta'),
+var Zeta=require('zeta'),
     demo=Zeta.module('',[]);
 
 demo.config('root',__dirname);
@@ -20,7 +20,7 @@ demo.get('/json',function($scope){
     $scope.res.writeHead(200,{
         'Content-Type':'application/json'
     });
-    $scope.res.write({msg:"hello,world"});
+    $scope.res.write(JSON.stringify({msg:"Hello,World!"}));
     $scope.res.end();
 });
 demo.get('/read',function($scope,$db){
