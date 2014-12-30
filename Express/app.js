@@ -15,7 +15,7 @@ var data=require('./db.js'),
     User=data.User,
     Book=data.Book;
 User.findOne({name:'suemi'},function(err,doc){
-    if(!err&!doc){
+    if(!err&&!doc){
         var user= new User({name:'suemi',passwd:'******'});
         user.save();
     }
