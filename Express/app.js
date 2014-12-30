@@ -8,13 +8,18 @@ app.use(express.static(__dirname+'/../public'));
 app.set('env','production');
 app.set('views',__dirname+'/../public');
 app.set('view engine','html');
-if('production'==app.get('env')){
-    app.use(errorhandler());
-    console.log('error handler turn on');
-}
+process.on('uncaughtException',function(err){
+    console.log('error occurs');
+});
 var data=require('./db.js'),
     User=data.User,
     Book=data.Book;
+User.findOne({name:'suemi'},function(err,doc){
+    if(!err&!doc){
+        var user= new User({name:'suemi',passwd:'******'});
+        user.save();
+    }
+});
 app.get('/',function(req,res){
     res.render('index');
 });
@@ -34,7 +39,7 @@ app.post('/write',function(req,res){
     var tmp=Math.floor(Math.random()*10000);
     Book.findOne({serial:tmp},function(err,doc){
         if(!doc){
-            Book({serial:tmp,money:400}).save(function(err,doc){
+           (new  Book({serial:tmp,money:400})).save(function(err,doc){
                 if(!err) res.send('success');
                 else res.send('fail');
             });
