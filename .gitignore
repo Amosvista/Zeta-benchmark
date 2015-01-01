@@ -2,6 +2,8 @@
 *~
 .tern*
 .#*
+db/
+!db/bench.conf
 node_modules/
 !test/base/node_modules
 coverage/
