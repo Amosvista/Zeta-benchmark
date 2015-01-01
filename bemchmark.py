@@ -5,7 +5,10 @@ import subprocess as sub
 import json
 import re
 store=open(sys.argv[1],'w')
-total=sys.argv[2]
+if len(sys.argv)>2:
+    total=sys.agrv[2]
+else:
+    total=10000
 if len(sys.argv)>3:
     hostPath=sys.argv[3]
 else:
@@ -44,3 +47,4 @@ for item in url:
         parseAB(child,result[item][c])
 
 store.write(json.dumps(result));
+store.close()
