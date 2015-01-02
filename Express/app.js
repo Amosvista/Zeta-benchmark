@@ -1,10 +1,12 @@
 var express=require('express'),
     app=express(),
     methodOverride=require('method-override'),
+    path=require('path'),
     errorhandler=require('errorhandler');
 
 app.use(methodOverride());
 app.use(express.static(__dirname+'/../public'));
+app.set('root',path.resolve(__dirname+'/../public/'));
 app.set('env','production');
 app.set('views',__dirname+'/../public');
 app.set('view engine','html');
@@ -20,8 +22,8 @@ process.on('uncaughtException',function(err){
         // user.save();
     // }
 // });
-app.get('/',function(req,res){
-    res.render('index');
+app.get('/index',function(req,res){
+    res.sendFile(app.get('root')+'/index.html');
 });
 app.get('/str',function(req,res){
     res.send('hello,world');

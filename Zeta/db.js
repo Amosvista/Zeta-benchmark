@@ -7,7 +7,7 @@ var userSchema=new Schema({
     passwd:String
 });
 userSchema.set('toJSON',{virtuals:true});
-var User=database.model('User',userschema);
+var User=database.model('User',userSchema);
 
 var bookSchema=new Schema({
     serial:{type:Number,unique:true},
