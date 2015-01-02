@@ -4,6 +4,7 @@ import sys
 import subprocess as sub
 import json
 import re
+import time
 store=open(sys.argv[1],'w')
 if len(sys.argv)>2:
     total=sys.agrv[2]
@@ -15,7 +16,7 @@ else:
     hostPath='http://127.0.0.1:3000/'
 #url=['index','str','json','read','write','chain']
 #cocurrency=[8,16,32,64,128,256]
-url=['str'];cocurrency=[8]
+url=['str','json','chain'];cocurrency=[16]
 result=dict.fromkeys(url,{})
 def parseAB(src,dst):
     src=src.split('\n')
@@ -26,7 +27,9 @@ def parseAB(src,dst):
         tmp=src[i].split(':')
         key=tmp[0]
         data=pattern.findall(tmp[1])
-        if(len(data)>1):
+        if not data:
+            continue
+        elif(len(data)>1):
             dst[key]=[]
             for j in data:
                 dst[key]=dst[key]+[float(j)]
@@ -42,9 +45,11 @@ def parseAB(src,dst):
 
 for item in url:
     for c in cocurrency:
-        child=sub.check_output('ab -n '+total+' -c '+str(c)+' '+hostPath+item,shell=True)
+        child=sub.check_output('ab -k -n '+str(total)+' -c '+str(c)+' '+hostPath+item,shell=True,close_fds=True)
+        #child=sub.Popen('ab -k -n '+str(total)+' -c '+str(c)+' '+hostPath+item,shell=True,close_fds=True,stdout=sub.PIPE)
         result[item][c]={}
         parseAB(child,result[item][c])
+        time.sleep(5)
 
 store.write(json.dumps(result));
 store.close()
