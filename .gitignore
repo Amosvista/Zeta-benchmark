@@ -12,3 +12,5 @@ coverage/
 !.travis.yml
 *.wiki
 tmp.txt
+*.json
+!package.json
