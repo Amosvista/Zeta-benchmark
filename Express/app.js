@@ -46,7 +46,7 @@ app.get('/read', function(req, res) {
         else res.send(doc);
     });
 });
-app.post('/write', function(req, res) {
+app.get('/write', function(req, res) {
     var tmp = Math.floor(Math.random() * 10000);
     Book.findOne({
         serial: tmp

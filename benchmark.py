@@ -17,7 +17,7 @@ abMethods['str'] = ''
 abMethods['json'] = ''
 abMethods['read'] = ''
 abMethods['chain'] = ''
-abMethods['write'] = ' -T -p '
+abMethods['write'] = ' '
 
 print('Example to use it:' +
       'benchmark.py express 10000 127.0.0.1:3000/ method 8')
@@ -85,6 +85,7 @@ for item in url:
         child = sub.check_output(
             'ab -k -n ' + str(total) + ' -c ' + str(c) + abMethods[item] + ' '
             + hostPath + item, shell=True, close_fds=True)
+
         result[item][c] = {}
         parseAB(child, result[item][c])
         time.sleep(5)
