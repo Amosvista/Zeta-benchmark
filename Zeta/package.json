@@ -1,8 +1,8 @@
 {
-    "name":"Zeta-benchmark",
-    "version":"0.0.1",
-    "private":"true",
-    "dependencies":{
-        "zeta":"0.4.0"
+    "name": "Zeta-benchmark",
+    "version": "0.0.1",
+    "private": "true",
+    "dependencies": {
+        "zeta": "0.5.1"
     }
 }
