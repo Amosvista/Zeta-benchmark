@@ -4,46 +4,50 @@
 import json
 import os
 
-chunk = None
 basePath = os.getcwd() + '/'
 data = {}
-keyList = None
 
 
 def getData(fileList):
-    chunk = {}
     for f in fileList:
         filePath = basePath+f+'.json'
         if os.path.isfile(filePath):
             data[f] = json.loads(open(filePath, 'r').read())
+            url=data[f].keys()
+            cocurrency=data[f][url[0]].keys()
+            keyList=data[f][url[0]][cocurrency[0]].keys()
+            frame = data.keys()
+            chunk=dict.fromkeys(frame,dict.fromkeys(url,{}))
         else:
             continue
-        chunk[f] = {}
-        url = data[f].keys()
+    for f in frame:
         for u in url:
-            chunk[f][u] = {}
-            cocurrency = data[f][u].keys()
-            for c in cocurrency:
-                keyList = data[f][u][c].keys()
-                for k in keyList:
-                    dataType = type(data[f][u][c][k])
-                    if dataType == int or dataType == float:
-                        tmp = []
-                        tmp = tmp+[dataType(data[f][u][c][k])]
-                    elif dataType == dict:
-                        percent = data[f][u][c][k].keys()
-                        tmp = dict.fromkeys(percent, [])
-                        for p in percent:
-                            tmp[p] = tmp[p]+[data[f][u][c][k][p]]
-
-                    elif dataType == list:
-                        stas = ['min', 'mean', 'sd', 'median', 'max']
-                        tmp = dict.fromkeys(stas, [])
-                        for i in range(len(stas)):
-                            s = stas[i]
-                            tmp[s] = tmp[s]+[data[f][u][c][k][i]]
-                    chunk[f][u][k] = tmp
+            for k in keyList:
+                dataType=type(data[f][u][cocurrency[0]][k])
+                if dataType==int or dataType==float:
+                    tmp=[]
+                    for c in cocurrency:
+                        tmp=tmp+[dataType(data[f][u][c][k])]
+                    chunk[f][u][k]=tmp
+                elif dataType==dict:
+                    percent=data[f][u][cocurrency[0]][k].keys()
+                    tmp=dict.fromkeys(percent,[])
+                    for p in percent:
+                        for c in cocurrency:
+                            tmp[p]=tmp[p]+[data[f][u][c][k][p]]
+                    chunk[f][u][k]=tmp
+                elif dataType==list:
+                    sta=['min','mean','sd','median','max']
+                    tmp=dict.fromkeys(sta,[])
+                    for i in range(len(sta)):
+                        for c in cocurrency:
+                            s=sta[i]
+                            tmp[s]=tmp[s]+[data[f][u][c][k][i]]
+                    chunk[f][u][k]=tmp
     return chunk
+
+
+
 
 
 def get(chunk, framework, url, abFeature, index=None):
