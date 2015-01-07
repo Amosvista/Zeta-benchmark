@@ -23,8 +23,10 @@ print('Example to use it:' +
       'benchmark.py express 10000 127.0.0.1:3000/ method 8')
 
 if len(sys.argv)-1 < 1:
+    os.remove(os.getcwd() + '/framework-Name.json')
     store = open(os.getcwd() + '/framework-Name.json', 'w+')
 else:
+    os.remove(sys.argv[1]+'.json')
     store = open(sys.argv[1]+'.json', 'w+')  # file to save benchmark result
 
 if len(sys.argv)-1 < 2:

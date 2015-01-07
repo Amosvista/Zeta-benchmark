@@ -23,7 +23,7 @@ demo.config('root', __dirname)
 
 
 demo.get('/', function($scope, $render) {
-    $scope.render('index.html');
+    $scope.sendFile('index.html');
 });
 demo.get('/str', function($scope) {
     $scope.send('hello,world').end();
