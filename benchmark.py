@@ -22,22 +22,22 @@ abMethods['write'] = ' -T -p '
 print('Example to use it:' +
       'benchmark.py express 10000 127.0.0.1:3000/ method 8')
 
-if len(sys.argv) < 1:
+if len(sys.argv)-1 < 1:
     store = open(os.getcwd() + '/framework-Name.json', 'w+')
 else:
     store = open(sys.argv[1]+'.json', 'w+')  # file to save benchmark result
 
-if len(sys.argv) < 2:
+if len(sys.argv)-1 < 2:
     total = 10000  # iteration number
 else:
     total = sys.argv[2]
 
-if len(sys.argv) < 3:
+if len(sys.argv)-1 < 3:
     hostPath = 'http://127.0.0.1:3000/'  # request url
 else:
     hostPath = sys.argv[3]
 
-if len(sys.argv) < 4:
+if len(sys.argv)-1 < 4:
     url = ['', 'str', 'json', 'read', 'write', 'chain']  # methods to test
 else:
     if sys.argv[4] in abMethods:
@@ -80,6 +80,8 @@ def parseAB(src, dst):  # parse the ab result into dst
 
 for item in url:
     for c in cocurrency:
+        print('Now we are testing on Url: ' + hostPath + item
+              + ', with cocurrency:' + str(c))
         child = sub.check_output(
             'ab -k -n ' + str(total) + ' -c ' + str(c) + abMethods[item] + ' '
             + hostPath + item, shell=True, close_fds=True)
