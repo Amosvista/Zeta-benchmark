@@ -50,7 +50,8 @@ if len(sys.argv) < 5:
 else:
     cocurrency = [sys.argv[5]]
 
-result = dict.fromkeys(url, {})  # each method a dict
+
+result = {u: {} for u in url}  # each method a dict
 
 
 def parseAB(src, dst):  # parse the ab result into dst
