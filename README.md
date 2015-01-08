@@ -28,44 +28,51 @@ ab -n 10000 -c [8,16,32,64,128,256] url
 
 ## How to run the test
 
-1. `git clone https://github.com/BenBBear/Zeta-benchmark Zeta-benchmark && cd ./Zeta-benchmark/Express && npm install && cd ../Zeta && npm install && cd ..`
-2. run `node ./Express/app.js && benchmark.py express && killall -KILL node` 
-3. run `node ./Zeta/app.js && benchmark.py zeta && killall -KILL node`
-4. run `analysis.py` to parse the json data, and plot figures, and save the figures into `img` folder.
+1. `git clone https://github.com/BenBBear/Zeta-benchmark Zeta-benchmark`
+
+2. `cd ./Zeta-benchmark/Express && npm install && cd ../Zeta && npm install`
+
+3. `cd ..`
+4. `node ./Express/app.js && benchmark.py express && killall -KILL node` 
+5. `node ./Zeta/app.js && benchmark.py zeta && killall -KILL node`
+6. `analysis.py` 
+
+
+The __analysis.py__ parse the json data, and plot figures, and save the figures into `img` folder.
 
 
 # Test Result
 
-## send html file
+## Send HTML File
 
 ![95% percent requests Time Latency bound](./img/95plb[sendFile].png)
 ![Mean Processing Time for each Request](./img/mtimeEachReq[sendFile].png)
 ![Error Number](./img/enun[sendFile].png)
 
 
-## send string
+## Send String
 
 ![95% percent requests Time Latency bound](./img/95plb[str].png)
 ![Mean Processing Time for each Request](./img/mtimeEachReq[str].png)
 ![Error Number](./img/enun[str].png)
 
-## json serialization
+## JSON Serialization
 ![95% percent requests Time Latency bound](./img/95plb[json].png)
 ![Mean Processing Time for each Request](./img/mtimeEachReq[json].png)
 ![Error Number](./img/enun[json].png)
 
-## db read
+## DB Read
 ![95% percent requests Time Latency bound](./img/95plb[read].png)
 ![Mean Processing Time for each Request](./img/mtimeEachReq[read].png)
 ![Error Number](./img/enun[read].png)
 
-## db read && write
+## DB Read && Write
 
 ![95% percent requests Time Latency bound](./img/95plb[write].png)
 ![Mean Processing Time for each Request](./img/mtimeEachReq[write].png)
 ![Error Number](./img/enun[write].png)
 
-## multiple middleware
+## Multiple Middleware
 ![95% percent requests Time Latency bound](./img/95plb[middleware].png)
 ![Mean Processing Time for each Request](./img/mtimeEachReq[middleware].png)
 ![Error Number](./img/enun[middleware].png)
@@ -75,4 +82,7 @@ ab -n 10000 -c [8,16,32,64,128,256] url
 # Conclusion
 
 
-The test here show that `Zeta` seems to be faster than `Express`, but we should see the benchmark here is very elementary. So it could be so bold to say that, but what we may have confidences on is that `Zeta` don't have too much speed problems.
+The test here show that `Zeta` seems to be faster than `Express`, but we should see the benchmark here is very elementary. 
+
+
+So it could be so bold to say that, but what we may have confidences on is that `Zeta` don't have too much speed problems.
