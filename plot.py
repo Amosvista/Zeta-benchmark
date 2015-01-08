@@ -17,8 +17,9 @@ def plot(title, ylabel, Url, KeyFeature):
         plt.legend(loc=4)
         plt.ion()
         plt.show()
+        return plt
     data = d.bmData()
-    draw(title, 'Concurrency (Number of Users in the same time)',
-         data.concurrency, ylabel,
-         data.get('express', Url, KeyFeature),
-         data.get('zeta', Url, KeyFeature))
+    return draw(title, 'Concurrency (Number of Users in the same time)',
+                data.concurrency, ylabel,
+                data.get('express', Url, KeyFeature),
+                data.get('zeta', Url, KeyFeature))
