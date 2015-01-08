@@ -13,4 +13,3 @@ coverage/
 !.travis.yml
 *.wiki
 tmp.txt
-*.png

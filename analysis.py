@@ -9,7 +9,7 @@ path = os.getcwd()+'/img/'
 def encap(x):
     return '['+x+']'
 
-url = ['', 'str', 'json', 'read', 'write']
+url = ['', 'str', 'json', 'read', 'write', 'chain']
 keys = ['percentage',  # 'Time per request',
         'Processing', 'Write errors']
 title = {}
@@ -34,6 +34,8 @@ def analysis():
         for k in keys:
             if u == '':
                 x = 'sendFile'
+            elif u == 'chain':
+                x = 'middleware'
             else:
                 x = u
             graph = plot(title[k]+encap(x),
